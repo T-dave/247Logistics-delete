@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Delete Your Account</title>
+<style>
+  :root {
+    --primary: #78A083;
+    --primary-dark: #223226;
+    --bg: #ffffff;
+    --surface: #f7fbf9;
+    --text: #101311;
+    --text-secondary: #60646C;
+    --line: #EDEBE7;
+    --danger: #E5484D;
+    --danger-surface: rgba(229,72,77,0.08);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101311; --surface: #171b18; --text: #ffffff;
+      --text-secondary: #B0B4BA; --line: #3b443e; --danger-surface: rgba(229,72,77,0.15);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101311; --surface: #171b18; --text: #ffffff;
+    --text-secondary: #B0B4BA; --line: #3b443e; --danger-surface: rgba(229,72,77,0.15);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif, system-ui;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 32px 20px 64px; }
+  header { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+  .logo { width: 36px; height: 36px; border-radius: 10px; background: var(--primary); flex-shrink: 0; }
+  header span { font-weight: 700; font-size: 18px; }
+  h1 { font-size: 26px; margin: 0 0 8px; }
+  .lead { color: var(--text-secondary); margin: 0 0 28px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+  .card h2 { font-size: 16px; margin: 0 0 6px; }
+  .card p { color: var(--text-secondary); font-size: 14px; margin: 0; }
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .steps li { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .steps li:last-child { border-bottom: none; }
+  .num { width: 24px; height: 24px; border-radius: 999px; background: var(--primary); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .warn { background: var(--danger-surface); border-radius: 14px; padding: 16px; font-size: 14px; margin-bottom: 28px; }
+  .warn strong { color: var(--danger); }
+  ul.consequences { margin: 8px 0 0; padding-left: 18px; color: var(--text-secondary); font-size: 14px; }
+  ul.consequences li { margin-bottom: 4px; }
+  form { display: flex; flex-direction: column; gap: 12px; }
+  label { font-size: 13px; font-weight: 600; margin-bottom: 4px; display: block; }
+  input, textarea {
+    width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--text); font-size: 15px; font-family: inherit;
+  }
+  textarea { min-height: 80px; resize: vertical; }
+  button {
+    appearance: none; border: none; border-radius: 12px; padding: 14px; font-size: 15px;
+    font-weight: 700; cursor: pointer;
+  }
+  .btn-danger { background: var(--danger); color: #fff; margin-top: 8px; }
+  .btn-danger:disabled { opacity: .5; cursor: not-allowed; }
+  #confirmation {
+    display: none; background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px; text-align: center; margin-top: 12px; font-size: 14px;
+  }
+  footer { margin-top: 40px; font-size: 13px; color: var(--text-secondary); text-align: center; }
+  footer a { color: var(--primary); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo"></div>
+    <span>247Logistics</span>
+  </header>
+
+  <h1>Delete your account</h1>
+  <p class="lead">You can delete your account and data directly in the app, or submit a request here.</p>
+
+  <div class="card">
+    <h2>Delete from the app</h2>
+    <p style="margin-bottom:12px;">Fastest way — takes less than a minute.</p>
+    <ul class="steps">
+      <li><span class="num">1</span> Open the app and go to <strong>Profile</strong></li>
+      <li><span class="num">2</span> Tap <strong>Security</strong></li>
+      <li><span class="num">3</span> Tap <strong>Delete account</strong> and confirm</li>
+    </ul>
+  </div>
+
+  <div class="warn">
+    <strong>This action is permanent.</strong> Deleting your account will remove:
+    <ul class="consequences">
+      <li>Your profile and order history</li>
+      <li>Any remaining wallet balance</li>
+      <li>Saved addresses and payment methods</li>
+      <li>Access to active or scheduled deliveries</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Can't access the app?</h2>
+    <p style="margin-bottom:16px;">Submit a deletion request below and we'll process it within 30 days.</p>
+
+    <form id="deleteForm">
+      <div>
+        <label for="email">Account email or phone number</label>
+        <input id="email" type="text" placeholder="you@example.com" required>
+      </div>
+      <div>
+        <label for="reason">Reason (optional)</label>
+        <textarea id="reason" placeholder="Let us know why you're leaving — optional"></textarea>
+      </div>
+      <button type="submit" class="btn-danger" id="submitBtn">Request account deletion</button>
+    </form>
+
+    <div id="confirmation">
+      ✅ Your request has been recorded. We'll email you to confirm once your account is deleted.
+    </div>
+  </div>
+
+  <footer>
+    Need help instead? <a href="mailto:support@yourapp.com">Contact support</a>
+  </footer>
+
+</div>
+
+<script>
+  const form = document.getElementById('deleteForm');
+  const confirmation = document.getElementById('confirmation');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    // Wire this up to your real deletion-request endpoint or mailto flow.
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+    setTimeout(function () {
+      form.style.display = 'none';
+      confirmation.style.display = 'block';
+    }, 500);
+  });
+</script>
+
+</body>
+</html>
